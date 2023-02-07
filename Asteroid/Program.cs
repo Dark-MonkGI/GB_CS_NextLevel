@@ -13,6 +13,7 @@ namespace Asteroid
     {
         static void Main(string[] args)
         {
+            // создали форму
             Form form= new Form();
             form.Width = 800;
             form.Height = 600;
@@ -25,10 +26,13 @@ namespace Asteroid
 
             form.Show();
 
+            //---------
+
+            //1:48
             Game.Init(form);
             Game.Draw();
 
-            //1:19
+            
 
             Application.Run(form);
         }
