@@ -21,9 +21,9 @@ namespace Asteroid
         //static public Random Random { get; set; } = new Random();
 
         static int Frames = 0;
-        //static int xBackground = 800;
+        static int xBackground = 800;
         static BaseObject[] _obj;
-        //static Star star;
+        static Star star;
         //static Bullet bullet;
         //private static Ship ship;
 
@@ -100,10 +100,10 @@ namespace Asteroid
                 _obj[i] = new BaseObject(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3), new Size(20, 20));
             //_obj[i] = new Planet(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3), "pictures\\planet.bmp");
 
-            //for (int i = _obj.Length / 2; i < _obj.Length; i++)
-            //    _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3));
+            for (int i = _obj.Length / 2; i < _obj.Length; i++)
+                _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3));
 
-            //star = new Star(new Point(200, 200), new Point(10, 10));
+            star = new Star(new Point(200, 200), new Point(10, 10));
             //bullet = new Bullet(new Point(-200, 400), new Point(0, 0), "pictures\\bullet.bmp");
             //ship = new Ship(new Point(0, 200), new Point(5, 5), "pictures\\Ship.bmp");
         }
@@ -114,8 +114,8 @@ namespace Asteroid
 
             // Проверяем вывод графики
             Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100/*xBackground*/, 100, 200, 200));
-            Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100/*xBackground*/, 100, 200, 200));
+            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(xBackground, 100, 200, 200));
+            Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(xBackground, 100, 200, 200));
 
             Buffer.Graphics.DrawString($"Frames:{Frames}", SystemFonts.DefaultFont, Brushes.AliceBlue, 600, 0);
 
@@ -134,8 +134,12 @@ namespace Asteroid
             foreach (BaseObject obj in _obj)
                 obj?.Update();
 
-            //xBackground -= 10;
-            //if (xBackground < -200) xBackground = 800;
+            xBackground -= 10;
+
+            if (xBackground < -200)
+                xBackground = 800;
+
+
             //for (int i = 0; i < _obj.Length; i++)
             //{
             //    if (_obj[i] != null)

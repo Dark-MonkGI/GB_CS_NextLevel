@@ -21,16 +21,16 @@ namespace Asteroid
             form.MinimumSize = new Size(800, 600);
             form.Text = "Space asteroid";
 
-            if (File.Exists("asteroid.ico"))  
-                form.Icon = new Icon("asteroid.ico");
+            if (File.Exists(@"asteroid.ico"))  
+                form.Icon = new Icon(@"asteroid.ico");
 
             form.Show();
 
             //---------
 
-            //1:48
+ 
             Game.Init(form);
-            Game.Draw();
+            //Game.Draw();
 
             
 

@@ -22,10 +22,9 @@ namespace Asteroid
         }
 
 
-        public void Draw()
+        public virtual void Draw()
         {
             Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
-
         }
 
         public void Update()
