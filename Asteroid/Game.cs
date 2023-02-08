@@ -18,7 +18,7 @@ namespace Asteroid
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
-        //static public Random Random { get; set; } = new Random();
+        static public Random Random { get; set; } = new Random();
 
         static int Frames = 0;
         static int xBackground = 800;
