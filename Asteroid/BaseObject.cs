@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace Asteroid
 {
-    internal class BaseObject
+    internal abstract class BaseObject
     {
         protected Point Pos { get; set; } // авто св-во
         protected Point Dir { get; set; }
-        protected Size Size { get; set; }   
+        protected Size Size { get; set; }
 
         public BaseObject(Point pos, Point dir,  Size size)
         {
@@ -21,11 +21,8 @@ namespace Asteroid
             this.Size = size;
         }
 
+        public abstract void Draw();
 
-        public virtual void Draw()
-        {
-            Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
-        }
 
         public void Update()
         {

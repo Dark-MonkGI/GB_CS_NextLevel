@@ -24,6 +24,7 @@ namespace Asteroid
         static int xBackground = 800;
         static BaseObject[] _obj;
         static Star star;
+        static Planet planet;
         //static Bullet bullet;
         //private static Ship ship;
 
@@ -97,13 +98,12 @@ namespace Asteroid
             _obj = new BaseObject[20];
 
             for (int i = 0; i < _obj.Length / 2; i++)
-                _obj[i] = new BaseObject(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3), new Size(20, 20));
-            //_obj[i] = new Planet(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3), "pictures\\planet.bmp");
+                _obj[i] = new Planet(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3), @"img\planet.png"); 
 
             for (int i = _obj.Length / 2; i < _obj.Length; i++)
-                _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(i * 2, i * 3));
+                _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(Random.Next(2, 5) * i/5, Random.Next(2, 5) * i/5 ));
 
-            star = new Star(new Point(200, 200), new Point(10, 10));
+
             //bullet = new Bullet(new Point(-200, 400), new Point(0, 0), "pictures\\bullet.bmp");
             //ship = new Ship(new Point(0, 200), new Point(5, 5), "pictures\\Ship.bmp");
         }

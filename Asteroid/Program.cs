@@ -32,7 +32,7 @@ namespace Asteroid
             Game.Init(form);
             //Game.Draw();
 
-            
+            //0:45
 
             Application.Run(form);
         }
