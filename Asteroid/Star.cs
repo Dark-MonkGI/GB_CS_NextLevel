@@ -41,4 +41,40 @@ namespace Asteroid
         }
     }
     #endregion
+
+    #region class Bullet
+    internal class Bullet : Star
+    {
+        Image img;
+
+        public bool CanFire { get; private set; } = true;
+
+
+        public Bullet(Point pos, Point dir, string imgFilename) : base(pos, dir)
+        {
+            img = Image.FromFile(imgFilename);
+            Size = new Size(img.Width, img.Height);
+        }
+
+        public override void Draw() 
+        {
+            Game.Buffer.Graphics.DrawImage(img, Pos);    
+        }
+
+        public override void Update()
+        {
+            Pos = new Point(Pos.X + Dir.X, Pos.Y);
+            if (Pos.X > Game.Width) 
+                Pos = new Point(0, Game.Random.Next(0, Game.Height));
+        }
+
+
+        //public void Fire(Point pos, Point dir)
+        //{
+        //    CanFire = false;
+        //    Pos = pos;
+        //    Dir = dir;
+        //}
+    }
+    #endregion
 }

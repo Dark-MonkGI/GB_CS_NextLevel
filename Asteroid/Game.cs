@@ -25,7 +25,7 @@ namespace Asteroid
         static BaseObject[] _obj;
         static Star star;
         static Planet planet;
-        //static Bullet bullet;
+        static Bullet bullet;
         //private static Ship ship;
 
         static Game()
@@ -104,7 +104,7 @@ namespace Asteroid
                 _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(Random.Next(2, 5) * i/5, Random.Next(2, 5) * i/5 ));
 
 
-            //bullet = new Bullet(new Point(-200, 400), new Point(0, 0), "pictures\\bullet.bmp");
+            bullet = new Bullet(new Point(0, 400), new Point(5, 0), @"img\bullet.bmp");
             //ship = new Ship(new Point(0, 200), new Point(5, 5), "pictures\\Ship.bmp");
         }
 
@@ -124,15 +124,15 @@ namespace Asteroid
                 obj?.Draw();
             
 
-            //bullet.Draw();
+            bullet.Draw();
             //ship.Draw();
             Buffer.Render();
         }
 
         public static void Update()
         {
-            foreach (BaseObject obj in _obj)
-                obj?.Update();
+            //foreach (BaseObject obj in _obj)
+            //    obj?.Update();
 
             xBackground -= 10;
 
@@ -140,21 +140,24 @@ namespace Asteroid
                 xBackground = 800;
 
 
-            //for (int i = 0; i < _obj.Length; i++)
-            //{
-            //    if (_obj[i] != null)
-            //    {
-            //        _obj[i].Update();
-            //        if (_obj[i] is Planet)
-            //            if (_obj[i].Collision(bullet))
-            //            {
-            //                Console.WriteLine("Clash!");
-            //                _obj[i] = null;
-            //            }
-            //    }
+            for (int i = 0; i < _obj.Length; i++)
+            {
+                if (_obj[i] != null)
+                {
+                    _obj[i].Update();
+                    if (_obj[i] is Planet)
+                        if (_obj[i].Collision(bullet))
+                        {
+                            Console.WriteLine("Clash!");
+                            _obj[i] = null;
+                        }
+                }
 
-            //}
-            //bullet.Update();
+            }
+
+
+
+            bullet.Update();
             //ship.Update();
         }
     }

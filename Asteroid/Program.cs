@@ -19,7 +19,7 @@ namespace Asteroid
             form.Height = 600;
             form.MaximumSize = new Size(800, 600);
             form.MinimumSize = new Size(800, 600);
-            form.Text = "Space asteroid";
+            form.Text = "Space asteroid";  
 
             if (File.Exists(@"asteroid.ico"))  
                 form.Icon = new Icon(@"asteroid.ico");
@@ -28,7 +28,7 @@ namespace Asteroid
 
             //---------
 
- 
+
             Game.Init(form);
             //Game.Draw();
 
