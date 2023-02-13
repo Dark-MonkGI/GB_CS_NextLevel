@@ -8,6 +8,14 @@ namespace Asteroid
 {
     internal class GameException: Exception
     {
-        public GameException() { }
+        public GameException() 
+        {
+            Console.WriteLine(base.Message);
+        }
+
+        public GameException(string message): base(message)
+        {
+
+        }
     }
 }
