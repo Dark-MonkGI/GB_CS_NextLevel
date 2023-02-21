@@ -26,7 +26,7 @@ namespace Asteroid
         static Star star;
         static Planet planet;
         static Bullet bullet;
-        //private static Ship ship;
+        private static Ship ship;
 
         static Game()
         {
@@ -54,7 +54,7 @@ namespace Asteroid
 
 
             Load();
-            //form.KeyDown += Form_KeyDown;
+            form.KeyDown += Form_KeyDown;
 
             Timer timer = new Timer();
             timer.Interval = 50;
@@ -68,30 +68,30 @@ namespace Asteroid
             Draw();
         }
 
-        //private static void Form_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    switch (e.KeyCode)
-        //    {
-        //        case Keys.Left:
-        //            ship.Left();
-        //            break;
-        //        case Keys.Down:
-        //            ship.Down();
-        //            break;
-        //        case Keys.Up:
-        //            ship.Up();
-        //            break;
-        //        case Keys.Right:
-        //            ship.Right();
-        //            break;
-        //        case Keys.Space:
-        //            if (bullet.CanFire)
-        //                bullet.Fire(new Point(ship.Rect.X + 40, ship.Rect.Y), new Point(5, 0));
-        //            break;
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    ship.Left();
+                    break;
+                case Keys.Down:
+                    ship.Down();
+                    break;
+                case Keys.Up:
+                    ship.Up();
+                    break;
+                case Keys.Right:
+                    ship.Right();
+                    break;
+                case Keys.Space:
+                    if (bullet.CanFire)
+                        bullet.Fire(new Point(ship.Rect.X + 40, ship.Rect.Y), new Point(5, 0));
+                    break;
 
 
-        //    }
-        //}
+            }
+        }
 
         public static void Load()
         {
@@ -105,7 +105,7 @@ namespace Asteroid
 
 
             bullet = new Bullet(new Point(0, 400), new Point(5, 0), @"img\bullet.bmp");
-            //ship = new Ship(new Point(0, 200), new Point(5, 5), "pictures\\Ship.bmp");
+            ship = new Ship(new Point(0, 200), new Point(5, 5), @"img\Ship.bmp");
         }
 
         public static void Draw()
@@ -125,7 +125,7 @@ namespace Asteroid
             
 
             bullet.Draw();
-            //ship.Draw();
+            ship.Draw();
             Buffer.Render();
         }
 
@@ -155,10 +155,10 @@ namespace Asteroid
 
             }
 
-
+            //1:05
 
             bullet.Update();
-            //ship.Update();
+            ship.Update();
         }
     }
 }
