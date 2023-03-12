@@ -25,7 +25,7 @@ namespace Asteroid
         static BaseObject[] _obj;
         static Star star;
         static Planet planet;
-        static Bullet bullet;
+        static List<Bullet> bullets;
         private static Ship ship;
 
         static Game()
@@ -85,8 +85,8 @@ namespace Asteroid
                     ship.Right();
                     break;
                 case Keys.Space:
-                    if (bullet.CanFire)
-                        bullet.Fire(new Point(ship.Rect.X + 40, ship.Rect.Y), new Point(5, 0));
+                    //if (bullet.CanFire)
+                     bullets.Add(new Bullet(new Point(ship.Rect.X + 40, ship.Rect.Y), new Point(5, 0), @"img\bullet.bmp"));
                     break;
 
 
@@ -104,8 +104,16 @@ namespace Asteroid
                 _obj[i] = new Star(new Point(Game.Width - 10 * i, Game.Height - 10 * i), new Point(Random.Next(2, 5) * i/5, Random.Next(2, 5) * i/5 ));
 
 
-            bullet = new Bullet(new Point(0, 400), new Point(5, 0), @"img\bullet.bmp");
+            bullets = new List<Bullet>(); 
+               // = new Bullet(new Point(0, 400), new Point(5, 0), @"img\bullet.bmp");
             ship = new Ship(new Point(0, 200), new Point(5, 5), @"img\Ship.bmp");
+
+            Bullet.Hide += Bullet_Hide; // Вызываем событие
+        }
+
+        private static void Bullet_Hide(Bullet obj)
+        {
+            bullets.Remove(obj);
         }
 
         public static void Draw()
@@ -117,14 +125,16 @@ namespace Asteroid
             Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(xBackground, 100, 200, 200));
             Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(xBackground, 100, 200, 200));
 
-            Buffer.Graphics.DrawString($"Frames:{Frames}", SystemFonts.DefaultFont, Brushes.AliceBlue, 600, 0);
+            Buffer.Graphics.DrawString($"Frames:{Frames} Bullets {bullets.Count()}", SystemFonts.DefaultFont, Brushes.AliceBlue, 600, 0);
 
 
             foreach (BaseObject obj in _obj)
                 obj?.Draw();
-            
 
-            bullet.Draw();
+            for (int i = 0; i < bullets.Count(); i++)
+                bullets[i].Draw();
+
+
             ship.Draw();
             Buffer.Render();
         }
@@ -146,18 +156,21 @@ namespace Asteroid
                 {
                     _obj[i].Update();
                     if (_obj[i] is Planet)
-                        if (_obj[i].Collision(bullet))
-                        {
-                            Console.WriteLine("Clash!");
-                            _obj[i] = null;
-                        }
+                        for (int j = 0; j < bullets.Count(); j++)
+                            if (_obj[i] != null && _obj[i].Collision(bullets[j]))
+                            {
+                                Console.WriteLine("Clash!");
+                                _obj[i] = null;
+                                bullets.RemoveAt(j);
+                                j--;    
+                            }
                 }
 
             }
 
-            //1:05
+            for (int i = 0; i < bullets.Count(); i++)
+                bullets[i].Update();
 
-            bullet.Update();
             ship.Update();
         }
     }

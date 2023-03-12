@@ -45,10 +45,10 @@ namespace Asteroid
     #region class Bullet
     internal class Bullet : Star
     {
+        public static event Action<Bullet> Hide; // событие
+
         Image img;
-
         public bool CanFire { get; private set; } = true;
-
 
         public Bullet(Point pos, Point dir, string imgFilename) : base(pos, dir)
         {
@@ -65,8 +65,12 @@ namespace Asteroid
         {
             Pos = new Point(Pos.X + Dir.X, Pos.Y);
             if (Pos.X > Game.Width)
+            {
+                Hide(this);
                 CanFire = true;
                 //Pos = new Point(0, Game.Random.Next(0, Game.Height));
+            }
+
         }
 
         public void Fire(Point pos, Point dir)
